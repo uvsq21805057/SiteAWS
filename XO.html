@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/XO.css">
+    <script src="./app.js"></script>
+    <title>XO Game</title>
+</head>
+<body>
+
+    <header>
+        <a href="accueil.html" class="accueil">Accueil</a>
+        <ul>
+            <li><a href="#" class="active">XO Game</a></li>
+            <li><a href= "#">Sudoku</a></li>
+            <li><a href="#">Snake</a></li>
+        </ul>
+    </header>
+
+    <main class="background">
+
+        <section class="title">
+            <h1>XO Game</h1>
+        </section>
+
+        <section class="grille">
+            <div class="case"></div>
+            <div class="case"></div>
+            <div class="case"></div>
+            <div class="case"></div>
+            <div class="case"></div>
+            <div class="case"></div>
+            <div class="case"></div>
+            <div class="case"></div>
+            <div class="case"></div>
+        </section>
+
+        <section class="affichageScore">
+            <p id="tableauScore">
+                <p>Victoire Joueur 1 : <span id="scoreJ1">0</span></p>
+                <p>Victoire Joueur 2 : <span id="scoreJ2">0</span></p>
+                <p>Egalité : <span id="egalite">0</span></p>
+            </p>
+        </section>
+
+        <section class="affichageResultat"></section>
+
+        <section class="affichage">
+            Tour Joueur :<span class="tour JX">X</span>
+        </section>
+
+        <section class="controls">
+            <button id="aide">Aide</button>
+            <button id="regle">Règle</button>
+            <button id="reset">Reset</button>
+        </section>
+
+    </main>
+</body>
+</html>
