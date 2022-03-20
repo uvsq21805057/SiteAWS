@@ -83,14 +83,21 @@ header ul li a.active{
 }
 
 /* Couleur Croix et Rond */
+.X {
+    color: #e47309;
+}
+
 .JX {
     color: #e47309;
+}
+
+.O {
+    color: #b31b85;
 }
 
 .JO {
     color: #b31b85;
 }
-
 .affichageScore p {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: white;

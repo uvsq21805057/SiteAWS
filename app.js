@@ -21,10 +21,38 @@ window.addEventListener('DOMContentLoaded', () => {
     var scoreJoueur2 = 0;
     var scoreNul = 0;
     var etatRound = true;
+    var J1 = 'X';
+    var J2 = 'O';
 
+    // Fonction qui affiche le résultat à l'utilisateur //
+    function alertVictoireJ1() {
+        resultat.innerHTML = 'Gagnant: [Joueur 1]';;
+        resultat.classList.remove('buffer');
+    };
+
+    function alertVictoireJ2() {
+        resultat.innerHTML = 'Gagnant: [Joueur 2]';
+        resultat.classList.remove('buffer');
+    };
+
+    function alertMatchNul() {
+        resultat.innerHTML = 'Match Nul';
+        resultat.classList.remove('buffer');
+    };
+
+    function checkJoueur(buffer) {
+        if (buffer === J1) {
+            return J1;
+        }
+        else {
+            return J2;
+        }
+    }
+    
     // Fonction ajout élément dans une case //
     function ajoutElementGrille(element) {
-        grille[element] = joueurActuel;
+        let bufferJoueur = checkJoueur(joueurActuel);
+        grille[element] = bufferJoueur;
     }
 
     const tabVictoire = [
@@ -46,11 +74,14 @@ window.addEventListener('DOMContentLoaded', () => {
             const tabvic1 = grille[buffertab[0]];
             const tabvic2 = grille[buffertab[1]];
             const tabvic3 = grille[buffertab[2]];
-            if (tabvic1 === '' || tabvic2 === '' || tabvic3 === '') {
+            if (tabvic1 === '' || 
+                tabvic2 === '' || 
+                tabvic3 === '') {
                 continue;
             }
             // Alignement de trois cases avec le même logo //
-            if ( (tabvic1 === tabvic2) && (tabvic2 === tabvic3) ) {
+            if ( (tabvic1 === tabvic2) 
+            && (tabvic2 === tabvic3) ) {
                 victoire = true;
                 break;
             }
@@ -58,7 +89,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         // Cas : Victoire //
         if (victoire == true) {
-            if (joueurActuel === 'X') {
+            if (joueurActuel === J1) {
                 //alert("LE GAGNANT EST LE JOUEUR1 !");
                 alertVictoireJ1();
                 scoreJoueur1 = scoreJoueur1 + 1;
@@ -102,25 +133,10 @@ window.addEventListener('DOMContentLoaded', () => {
         window.open('aide.html','width = 500, height = 500');
     }
 
-    // Fonction qui affiche le résultat à l'utilisateur //
-    function alertVictoireJ1() {
-        resultat.innerHTML = 'Gagnant: [Joueur 1]';;
-        resultat.classList.remove('buffer');
-    };
-
-    function alertVictoireJ2() {
-        resultat.innerHTML = 'Gagnant: [Joueur 2]';
-        resultat.classList.remove('buffer');
-    };
-
-    function alertMatchNul() {
-        resultat.innerHTML = 'Match Nul';
-        resultat.classList.remove('buffer');
-    };
-
     // Vérification si une case est déjà joué //
     function checkCasevalue(element){
-        if (element.innerText === 'X' || element.innerText === 'O'){
+        if (element.innerText === J1 || 
+            element.innerText === J2){
             return false;
         }
         return true;
@@ -128,22 +144,24 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Fonction Tour Joueur1 --> Joueur2 //
     function swapJoueur() {
-        tourJoueur.classList.remove(`J${joueurActuel}`);
-        if (joueurActuel === 'X') {
-            joueurActuel = 'O';
+        let bufferJoueur = checkJoueur(joueurActuel);
+        tourJoueur.classList.remove(bufferJoueur);
+        if (joueurActuel === J1) {
+            joueurActuel = J2;
         }
         else {
-            joueurActuel = 'X';
+            joueurActuel = J1;
         }
         tourJoueur.innerText = joueurActuel;
-        tourJoueur.classList.add(`J${joueurActuel}`);
+        tourJoueur.classList.add(bufferJoueur);
     };
 
     const jouer = (element, index) => {
+        let bufferJoueur = checkJoueur(joueurActuel);
         if( (checkCasevalue(element) === true) &&
             (etatRound == true) ) {
-            element.innerText = joueurActuel;
-            element.classList.add(`J${joueurActuel}`);
+            element.innerText = bufferJoueur;
+            element.classList.add(bufferJoueur);
             ajoutElementGrille(index);
             checkVictoire();
             swapJoueur();
@@ -162,14 +180,15 @@ window.addEventListener('DOMContentLoaded', () => {
         resultat.classList.add('buffer');
 
         // Iniatilisation de la partie avec le Joueur1 //
-        if (joueurActuel === 'O') {
+        if (joueurActuel === J2) {
             swapJoueur();
         }
 
+        // Suppression de tous les logos //
         cases.forEach(element => {
             element.innerText = '';
-            element.classList.remove('JX');
-            element.classList.remove('JO');
+            element.classList.remove('X');
+            element.classList.remove('O');
         });
     };
 
