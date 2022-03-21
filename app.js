@@ -7,8 +7,12 @@ window.addEventListener('DOMContentLoaded', () => {
     const egal = document.getElementById('egalite');
     const boutonReset = document.getElementById('reset');
     const boutonAide = document.getElementById('aide');
-    const boutonRegle = document.getElementById('regle');
     const resultat = document.querySelector('.affichageResultat');
+
+    // Popup Règle //
+    const boutonRegle = document.getElementById('regle');
+    const overlayPopup = document.getElementById('overlay');
+    const close = document.getElementById('close');
 
     // Variables Globale mémoire du jeu //
     let grille = [
@@ -124,8 +128,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // Fonction lié au bouton Regle //
-    function afficheRegle() {;
-        window.open('regle.html','width = 500, height = 500');
+    function afficheRegle() {
+        overlayPopup.style.display = 'block';
+    }
+
+    function fermerRegle() {
+        overlayPopup.style.display = 'none';
     }
 
     // Fonction lié au bouton Aide //
@@ -200,5 +208,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // Lien click Bouton --> fonction //
     boutonReset.addEventListener('click', afficheNouvelleGrille);
     boutonRegle.addEventListener('click', afficheRegle);
+    close.addEventListener('click', fermerRegle);
     boutonAide.addEventListener('click', afficheAide);
 });
